@@ -118,7 +118,7 @@ export class DS_GLOBALS {
         UNKNOWN: 5,
         INITIATIVE: 6, /* Any initiative Rolls */
         PERCEPTION: 7,  /* Any perception Rolls */  
-        FLATCHECK:  8
+        FLATCHECK:  8,
 
         /* OTHER SYSTEM ROLL TYPES */
 
