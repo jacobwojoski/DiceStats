@@ -1,5 +1,5 @@
-import { DS_GLOBALS } from "../dice-stats-globals.js";
-import { DICE_STATS_UTILS } from "../dice-stats-utils.js";
+import { DS_GLOBALS } from "../../dice-stats-globals.js";
+import { DICE_STATS_UTILS } from "../../dice-stats-utils.js";
 import { DS_MSG_DIE_ROLL_INFO } from "./dice-stats-rollmsginfo.js";
 
 //Storage Class for Each Die

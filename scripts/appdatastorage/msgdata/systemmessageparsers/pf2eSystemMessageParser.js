@@ -1,4 +1,4 @@
-import { DS_GLOBALS } from "../dice-stats-globals.js";
+import { DS_GLOBALS } from "../../../dice-stats-globals.js";
 import { DS_MSG_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo.js";
 import { DS_MSG_DIE_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo.js";
 
