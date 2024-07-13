@@ -1,8 +1,8 @@
-import { DS_GLOBALS } from "./dice-stats-globals.js";
+import { DS_GLOBALS } from "./globals.js";
 import { MESSAGE_PARSER_FACTORY } from "./systemMessageParsers/dice-stats-messageparserfactory.js";
 import { PLAYER } from "./appdatastorage/dice-stats-player.js";
-import { DB_INTERACTION } from "./database/dice-stats-db.js";
-import { ComparePlayerObjUtil } from "./dice-stats-utils.js";
+import { DB_INTERACTION } from "./database/db.js";
+import { ComparePlayerObjUtil } from "./utils.js";
 
 //Were using this class as a singleton although its not quite set up correctly as one. 
 // This is the main dice stats class. It holds all the data.

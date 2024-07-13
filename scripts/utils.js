@@ -1,5 +1,5 @@
-import { DS_GLOBALS } from "./dice-stats-globals.js";
-import { DB_INTERACTION } from "./database/dice-stats-db.js";
+import { DS_GLOBALS } from "./globals.js";
+import { DB_INTERACTION } from "./database/db.js";
 /**
  * Mic utility funtions that get used in different parts of the code. 
  */

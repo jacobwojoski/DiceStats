@@ -1,7 +1,7 @@
-import { DS_GLOBALS } from "../dice-stats-globals.js";
-import { GlobalStatusPage } from "./dice-stats-globalstatuspage.js";
-import { ComparePlayerStatusPage } from "./dice-stats-compareplayerspage.js";
-import { ExportDataPage } from "./dice-stats-exportdatapage.js";
+import { DS_GLOBALS } from "../globals.js";
+import { GlobalStatusPage } from "./globalstatuspage.js";
+import { ComparePlayerStatusPage } from "./compareplayerspage.js";
+import { ExportDataPage } from "./exportdatapage.js";
 import { CustomTabFormClass } from "./dice-stats-tabedplayerstatspage.js";
 
 /**

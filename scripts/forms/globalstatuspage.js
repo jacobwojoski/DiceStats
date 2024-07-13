@@ -1,6 +1,6 @@
-import { DS_GLOBALS } from "../dice-stats-globals.js";
-import { DATA_PACKAGER } from "../database/dice-stats-datapack.js";
-import { DB_INTERACTION } from "../database/dice-stats-db.js";
+import { DS_GLOBALS } from "../globals.js";
+import { DATA_PACKAGER } from "../database/datapack.js";
+import { DB_INTERACTION } from "../database/db.js";
 
 //==========================================================
 //===================== FORMS SHIT =========================

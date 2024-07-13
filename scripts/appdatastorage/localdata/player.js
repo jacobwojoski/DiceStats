@@ -1,6 +1,6 @@
-import { DIE_INFO } from "./dice-stats-diceinfo.js";
-import { LOCAL_ROLL_INFO } from "./dice-stats-rollinfo.js";
-import { DS_GLOBALS } from "../../dice-stats-globals.js";
+import { DIE_INFO } from "./diceinfo.js";
+import { LOCAL_ROLL_INFO } from "./rollinfo.js";
+import { DS_GLOBALS } from "../../globals.js";
 
 //Class that defines a player. Players are all connected people to server including gm
 //Player has Die Info for each die type they roll & some other misc data

@@ -1,5 +1,5 @@
 import { DS_MSG_ROLL_INFO } from "./dice-stats-rollmsginfo.js";
-import { DS_GLOBALS } from "../dice-stats-globals.js";
+import { DS_GLOBALS } from "../../globals.js";
 
 /**
  * Class to hold any info we want to track that applies 

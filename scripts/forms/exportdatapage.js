@@ -1,4 +1,4 @@
-import { DS_GLOBALS } from "../dice-stats-globals.js";
+import { DS_GLOBALS } from "../globals.js";
 
 //==========================================================
 //===================== FORMS SHIT =========================

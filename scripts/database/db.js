@@ -1,4 +1,4 @@
-import { DS_GLOBALS } from "../dice-stats-globals.js";
+import { DS_GLOBALS } from "../globals.js";
 /**
  *  Foundry has 2 types of database options, Flags and Files. (Both are not a real DB)
  * 
