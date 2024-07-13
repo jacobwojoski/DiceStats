@@ -1,5 +1,5 @@
 /* List of data thats specific to PF2e that each PC might want to have tracked */
-export class PF2E_SYSTEM_DATA {
+export class DND5E_SYSTEM_DATA {
     ATK_ROLL_NUM_HISTORY = 20; //Track last X number of rolls in line chart
 
     /* ------------------------------- */

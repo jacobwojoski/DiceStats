@@ -1,3 +1,6 @@
+import { PF2E_SYSTEM_DATA } from "./pf2eSystemData";
+import { DRAGONBANE_SYSTEM_DATA } from "./dragonbaneSystemData";
+import { DAGGERHEART_SYSTEM_DATA } from "./daggerheartSystemData";
 /* Create a data storage object for specific systems
     The data storage object is used to display any system specific 
     roll info. 
@@ -6,7 +9,7 @@
     that will display info bassed on whatever system the user in currently in.
 */
 
-class SystemDataFactory {
+export class SystemDataFactory {
     /**
      * 
      * @param {systemid} systemid - current gamesystem ID
@@ -26,6 +29,8 @@ class SystemDataFactory {
                 return new DRAGONBANE_SYSTEM_DATA;
             case "daggerheart" :
                 return new DAGGERHEART_SYSTEM_DATA;
+            case "dnd5e" :
+                return new DND5E_SYSTEM_DATA;
             default :
                 return null;
         }
