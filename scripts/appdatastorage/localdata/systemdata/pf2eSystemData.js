@@ -4,7 +4,7 @@
  */
 class PF2E_SYSTEM_DATA {
     ATK_ROLL_NUM_HISTORY = 20; //Track last X number of rolls in line chart
-    
+
     /* ------------------------------- */
     //Attack Info
     TotalAtks       = 0;
