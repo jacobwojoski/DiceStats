@@ -8,7 +8,7 @@ import { ComparePlayerObjUtil } from "./utils.js";
 // This is the main dice stats class. It holds all the data.
 /**
  * Quick discrip on how mod works:
- *      Hook into Foundry scene render to add dce stats buttons [async/hooks & form/scenecontrol]
+ *      Hook into Foundry scene render to add dice stats buttons [async/hooks & form/scenecontrol]
  *      Hook into Foundry chat msg creation to add roll to data storage
  *          Data Storage:
  *              DICE_STATS_CLASS - Main class that holds backend data for dice stats

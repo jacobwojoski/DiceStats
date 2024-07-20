@@ -2,6 +2,9 @@ import { DS_MSG_ROLL_INFO } from "./dice-stats-rollmsginfo.js";
 import { DS_GLOBALS } from "../../globals.js";
 
 /**
+ * NOTE: THIS CLASS IS TO BE REPLACED BY SYSTEM DATA. EACH SYSTEM CARES ABOUT DIFFERENT
+ * ROLL INFO SO ITS IMPOSSIBLE TO REALLY HAVE A GENERIC CLASS FOR THIS
+ * 
  * Class to hold any info we want to track that applies 
  * to the roll as a whole rather than specific dice. 
  * 
