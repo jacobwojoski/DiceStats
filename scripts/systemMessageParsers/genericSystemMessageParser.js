@@ -3,21 +3,14 @@ import { DS_MSG_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo.js";
 import { DS_MSG_DIE_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo.js";
 
 /**
+ * These parsers take raw foundry roll messages and convert them into DS_MSG_ROLL_INFO object
+ * These will get parsed and added into the main data structure later
+ * 
  * Parse a generic system parser,
  * All parsers must implment parseMsgRoll
  */
 export class GENERIC_SYSTEM_MESSAGE_PARSER {
 
-    /* ROLL_INFO Vars:
-    DieType=    0; //{DIE_TYPE}
-    RollType=   0; //{ROLL_TYPE}
-    RollValue=  0; //{INT}
-    IsBlind=    0; //{BOOLEAN}
-    DegSuccess= 0; //{DEG_SUCCESS}
-    CheckDiff=  null;       //{INT}
-    MissFromAdv = false;
-    HitFromAdv = false;
-    */
     /**
      * Parse the passed in message
      * @param {*} msg 
@@ -29,12 +22,14 @@ export class GENERIC_SYSTEM_MESSAGE_PARSER {
 
         let retRollInfoAry = [];
 
-        //For multiple rolls in chat
+        // For multiple rolls in chat EX: /r 1d20 + /r 1d6 = 2 rolls
         for (let tempRoll = 0; tempRoll < msg.rolls.length; tempRoll++) {
             retRollInfoAry.push(new DS_MSG_ROLL_INFO);
             let rollObjSel = msg.rolls[tempRoll];
 
             retRollInfoAry[tempRoll] = this.updateRollInfo(msg, retRollInfoAry[tempRoll], rollObjSel);
+
+            retRollInfoAry[tempRoll] = this.getDicePoolInfo(msg, retRollInfoAry[tempRoll], rollObjSel);
 
             //For multiple dice types per roll
             for(let tempDieType=0; tempDieType<rollObjSel?.dice?.length; tempDieType++){
@@ -80,6 +75,57 @@ export class GENERIC_SYSTEM_MESSAGE_PARSER {
      */
     updateRollInfo(msg, rollObj){
         return rollObj
+    }
+
+    /**
+     * Check if the roll was a dice poll and fill in any roll data coresponding to dice polls
+     * ONLY HANDLE [KEEP HIGEST DIE] and [KEEP LOWEST DIE] dice pools
+     * @param {Foundry/System msg struct} msg - Foundry/System chat message structrue that needs to be parsed
+     * @param {DS_MSG_ROLL_INFO} retRollInfoObj - Roll info object that gets passed in. This is updated to be used later, Store pool info here
+     * @param {MSG.ROLL[it]} rollObj - Roll object of msg structure that needs to be parsed
+     * @returns {DS_MSG_ROLL_INFO} retRollInfoObj - This is an object ref so we update it and return it
+     * 
+     * DICE POOL info to fill out:
+        IsDicePool= -1; //{BOOLEAN} Is this a dice pool roll? (Current Dice pool design is multiple dice keep specific #)
+        PoolSize=   -1; //{INT} How many dice rolled in dice pool
+        PoolMax=    -1; //{INT} Max Value from pool
+        PoolMin=    -1; //{INT} Min Value from pool
+        PoolVal=    -1; //{INT} Value from pool, It could be a max or min of multiple dice depending on the system/modifiers
+     */
+    getDicePoolInfo(msg, retRollInfoObj, rollObjSel){
+        let rollFormula = rollObjSel.formula;
+
+        // Roll is a dice pool or adv/dis that uses roll X take highest/lowest
+        if(rollFormula.contains("kh1") || rollFormula.contains("kl1")){
+            retRollInfoObj.IsDicePool=true;
+            retRollInfoObj.PoolSize= rollObjSel.result.value;
+            retRollInfoObj.PoolMax= rollObjSel.result.value;
+            retRollInfoObj.PoolMin= rollObjSel.result.value;
+            retRollInfoObj.PoolVal= rollObjSel.result.value;
+        }
+        return retRollInfoObj;
+    }
+
+    /**
+     * Check if the roll 2 dice and get corresponding info, Mostly used for systems like pbta
+     * @param {Foundry/System msg struct} msg - Foundry/System chat message structrue that needs to be parsed. 
+     *                                              This is made up of default foundry info and any info system wanted to add
+     * @param {DS_MSG_ROLL_INFO} retRollInfoObj - Roll info object that gets passed in. This is updated to be used later, 
+     *                                              Store TwoDx info here
+     * @param {MSG.ROLL[it]} rollObj - Roll object of msg structure that needs to be parsed
+     * @returns {DS_MSG_ROLL_INFO} retRollInfoObj - This is an object ref so we update it and return it
+     * 
+     * 2DX info to store
+        Is2DxRoll=  -1; //{BOOLEAN} Is the system a 2dx system like PBTA, DUNE, Daggerheart, ... etc
+        TwoDxVal=   -1; //{INT} Value from the two dice rolled
+     */
+    getTwoDxInfo(msg, retRollInfoObj, rollObjSel){
+        // See if roll is 2dx
+        let rollFormula = rollObjSel.formula;
+        if(rollFormula.contains("2d")){
+            
+        }
+        return retRollInfoObj;
     }
 
     /**

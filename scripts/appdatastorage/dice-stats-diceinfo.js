@@ -47,6 +47,15 @@ export class DIE_INFO {
     PERCEPTION_ROLLS_BLIND = [];
     INITIATIVE_ROLLS_BLIND = [];
 
+    /* Dice pools (Roll [XdY kh 1] or Roll [XdY kl 1]) There are so many different ways systems can use dice pools 
+            So we're only handling the FitD keep highest or lowest 1 die for now 
+    */
+    DICE_POOL_ROLLS = [];   /* 2d array - [die-type][pool-size][die-result]=num-times-happened Initial-implementation has pool sizes of 1-10+ */
+    DICE_POOL_TOTALS = [];  /* 1d array - [die-type][die-result]=total_rolls (add roll totals from all pool sizes at specific die result) */
+
+    /* 2dX Rolls */
+    TWO_DX_ROLLS = []; /* 1d array - [die-result]*/
+
     /**
      * constructor set values to defaults
      * @param {int} dieMax - max value the die can be

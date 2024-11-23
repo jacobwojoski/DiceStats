@@ -56,6 +56,10 @@ export class DS_GLOBALS {
         LOCAL_ENABLE_2D20_DETAILS_TAB:    'local_enable_2d20_details_tab',
 
         LOCAL_ENABLE_HIT_MISS_INFO_TAB:   'local_enable_hit_miss_info_tab',
+
+        // Setting to set type of Dice Pools to track, Will currently only handle Keep highest or keep lowest dice pools
+        LOCAL_ENABLE_DICE_DETAILS_POOL_TAB: 'local_enable_dice_pool_details_tab',
+        GLOBAL_DICE_POOL_TYPE:              'global_dice_pool_type',  /* track Keep high vs keep low dice pools */
     };
 
     /* ------ GLOBAL DS OBJECTS ------- */
@@ -90,6 +94,17 @@ export class DS_GLOBALS {
         D20:    7,
         D100:   8
         /*
+        UNKNOWN: 0,
+        D2: 2,
+        D3: 3,
+        D4: 4,
+        D6: 6,
+        D8: 8,
+        D10: 10,
+        D12: 12,
+        D20: 20,
+        D50: 50,
+        D100: 100
         TWOd6
         TWOd12
         TWOd20
@@ -134,7 +149,7 @@ export class DS_GLOBALS {
         SUCCESS:        3,
         CRIT_SUCCESS:   4,
         
-        // PBTA DEG_SUCCESS
+        // PBTA / FitD DEG_SUCCESS
         DOWN_BREAT:     5,
         MIXED_BREAT:    6,
         UPBEAT:         8,
