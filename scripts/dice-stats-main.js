@@ -37,6 +37,7 @@ import { ComparePlayerObjUtil } from "./dice-stats-utils.js";
  * 
  */
 export class DiceStatsTracker {
+    static _singleton_pointer = null;
     AM_I_GM = false;
 
     ID = 'dice-stats';
@@ -73,7 +74,24 @@ export class DiceStatsTracker {
         }
     }
 
+    /**
+     * Dice Stats sould be singleton so set it up to be
+     * @returns pointer to DiceStatsTracker
+     */
+    static getInstance(){
+        if(DiceStatsTracker._singleton_pointer == null){
+            DiceStatsTracker._singleton_pointer = new DiceStatsTracker();
+        }
+        return DiceStatsTracker._singleton_pointer;
+    }
+
+    /**
+     * Constructor for the module. 
+     * @returns {VOID}
+     */
     constructor(){
+        /* Singleton instance check */
+        if (DiceStatsTracker._singleton_pointer != null){return;}
         //Get Settings and System Info
         // Store the current system, for settings purposes. It has to be set here, and not in the parent
         // class, because the system needs to initialize on foundry boot up before we can get its id
@@ -223,6 +241,10 @@ export class DiceStatsTracker {
             config: true,       // show in module config
             hint: `DICE_STATS_TEXT.settings.${DS_GLOBALS.MODULE_SETTINGS.LOCAL_ENABLE_HIT_MISS_INFO_TAB}.Hint`,
         })
+
+        if(DiceStatsTracker._singleton_pointer == null){
+            DiceStatsTracker._singleton_pointer = this;
+        }
     }
 
     /**
@@ -417,5 +439,22 @@ export class DiceStatsTracker {
     clear_database()
     {
         DB_INTERACTION.clearDB();
+    }
+
+    /**
+     * 
+     * @returns {STRING[]} = Array of player ID's
+     */
+    getPlayerIDs(){
+        let ary;
+        for (user_id of this.PLAYER_DATA_MAP.keys()){
+            
+            ary.push(
+                {
+                    id: user_id, 
+                    name: game.users.get(user_id).name
+                });
+        }
+        return ary;
     }
 }

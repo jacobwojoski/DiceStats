@@ -3,11 +3,12 @@ import { PF2E_SYSTEM_MESSAGE_PARSER } from "./pf2eSystemMessageParser.js";
 import { DND5E_SYSTEM_MESSAGE_PARSER } from "./dnd5eSystemMessageParser.js";
 import { DRAGONBANE_SYSTEM_MESSAGE_PARSER } from "./dragonbaneSystemMessageParser.js";
 import { GENERIC_SYSTEM_MESSAGE_PARSER } from "./genericSystemMessageParser.js";
+import { COC7E_SYSTEM_MESSAGE_PARSER } from "./coc7eSystemMessageParser.js";
 
 /**
  * Get message parser based off the system we're using
  */
-export class MESSAGE_PARSER_FACTORY  {
+export class MESSAGE_PARSER_FACTORY {
     
     /* Create a message parser object bassed on the current system Different systems need to do different stuff to parse the msg*/
     static createMessageParser(systemid)
@@ -26,7 +27,8 @@ export class MESSAGE_PARSER_FACTORY  {
                 return new DND5E_SYSTEM_MESSAGE_PARSER;
             case "dragonbane" :
                 return new DRAGONBANE_SYSTEM_MESSAGE_PARSER;
-            
+            case "CoC7" :
+                return new COC7E_SYSTEM_MESSAGE_PARSER;
             case "daggerheart" :
             case "mcdmrpg" : 
             default :

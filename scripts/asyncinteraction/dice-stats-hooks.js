@@ -8,6 +8,7 @@ import { DB_INTERACTION } from "../database/dice-stats-db.js";
 import { CustomSceneControl, CustomSceneControlToolCompare, CustomSceneControlToolExport, CustomSceneControlToolGlobal, CustomSceneControlToolPlayer } from "../forms/dice-stats-scenecontrol.js";
 import { DICE_STATS_UTILS } from "../dice-stats-utils.js";
 import { DS_GLOBALS } from "../dice-stats-globals.js";
+import { DiceStatsAPI } from "./dice-stats-api.js";
 
 // Hooks 'hook' into different external triggers
 //  - EX: Loading of A page, When a roll gets made etc
@@ -148,6 +149,35 @@ Hooks.once('init', () => {
     if(game.modules.get("midi-qol")?.active){
         midiQolSupport();
     }
+
+    /* Create Dice Stats API */
+    game.modules.get('dice-stats').api = {
+        saveRollValue: DiceStatsAPI.saveRollValue,//(/*player-id*/player_id,/*int:enum*/die_type, /*result*/roll_value),
+        saveRollInfo: DiceStatsAPI.saveRollInfo,//(/*player-id*/player_id, /*roll_info*/roll_info),
+
+        getPlayerList: DiceStatsAPI.getPlayerList,//(),
+        getGlobals: DiceStatsAPI.getGlobals,//(),
+
+        openGlobalStats: DiceStatsAPI.openGlobalStats,//(),
+        openCompareStats: DiceStatsAPI.openCompareStats,//(),
+        openPlayerStats: DiceStatsAPI.openPlayerStats,//(/*String*/player_id),
+        openExportStats: DiceStatsAPI.openExportStats,//(/*Bool*/isGM)
+
+    };
+
+    // Call hook to tell people API is ready
+    Hooks.callAll('diceStatsReady', game.modules.get('dice-stats').api);
+
+    /* --- Examples on how to use API
+        // if I need to do something as soon as the cool-module is ready
+        Hooks.on('diceStatsReady', (api) => {
+        // do what I need with their api
+        });
+
+        // alternatively if I know that the API should be populated when I need it,
+        // I can defensively use the api on game.modules
+        game.modules.get('diceStatsReady')?.api?.diceStatsApiStaticMethod(someInput)
+    */
 })
 
 // Hook to interact when scenecontrols get created Method used to have a better location to access player data

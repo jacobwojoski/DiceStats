@@ -8,7 +8,7 @@
     }
   ],
   "compatibility": {
-    "minimum": "10",
+    "minimum": "12",
     "verified": "12"
   },
   "esmodules": [
@@ -17,6 +17,7 @@
     "scripts/appdatastorage/dice-stats-rollinfo.js",
     "scripts/appdatastorage/dice-stats-rollmsginfo.js",
 
+    "scripts/asyncinteraction/dice-stats-api.js",
     "scripts/asyncinteraction/dice-stats-handlebars.js",
     "scripts/asyncinteraction/dice-stats-hooks.js",
     "scripts/asyncinteraction/dice-stats-sockets.js",
@@ -61,8 +62,8 @@
     }
   ],
   "socket": true,
-  "version": "1.19.1",
-  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.19.1.zip",
+  "version": "1.21.0",
+  "download": "https://github.com/jacobwojoski/dice-stats/archive/refs/tags/v1.21.0.zip",
   "manifest": "https://github.com/jacobwojoski/dice-stats/releases/latest/download/module.json",
   "changelog": "https://github.com/jacobwojoski/dice-stats/blob/main/CHANGELOG.md",
   "readme": "https://github.com/jacobwojoski/dice-stats",
