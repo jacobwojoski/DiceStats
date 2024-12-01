@@ -112,7 +112,7 @@ export class GENERIC_SYSTEM_MESSAGE_PARSER {
                     // For each die in roll
                     for (let die of dice_type.dice) {
                         let die_result = die.value;
-                        retRollInfoObj.PoolSize= dice_type.length;
+                        retRollInfoObj.PoolSize= dice_type.dice.length;
 
                         // Is it the selected die?
                         if (die.active == true) {

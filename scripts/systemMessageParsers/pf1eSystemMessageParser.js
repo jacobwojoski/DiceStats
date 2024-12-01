@@ -5,7 +5,7 @@ import { DS_MSG_DIE_ROLL_INFO } from "../appdatastorage/dice-stats-rollmsginfo.j
 /**
  * Parse Chat message obj and gather all the info we might use
  */
-export class PF1E_SYSTEM_MESSAGE_PARSER
+export class PF1E_SYSTEM_MESSAGE_PARSER //extends GENERIC_SYSTEM_MESSAGE_PARSER
 {
     /* ROLL_INFO Vars:
     DieType=    0; //{DIE_TYPE}
