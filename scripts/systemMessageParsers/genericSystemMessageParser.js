@@ -86,22 +86,65 @@ export class GENERIC_SYSTEM_MESSAGE_PARSER {
      * @returns {DS_MSG_ROLL_INFO} retRollInfoObj - This is an object ref so we update it and return it
      * 
      * DICE POOL info to fill out:
-        IsDicePool= -1; //{BOOLEAN} Is this a dice pool roll? (Current Dice pool design is multiple dice keep specific #)
+        IsDicePool= -1; //{BOOLEAN} Is this a dice pool roll? (Current Dice pool design is multiple dice keep Highest or lowest 1)
         PoolSize=   -1; //{INT} How many dice rolled in dice pool
         PoolMax=    -1; //{INT} Max Value from pool
         PoolMin=    -1; //{INT} Min Value from pool
         PoolVal=    -1; //{INT} Value from pool, It could be a max or min of multiple dice depending on the system/modifiers
      */
     getDicePoolInfo(msg, retRollInfoObj, rollObjSel){
+
         let rollFormula = rollObjSel.formula;
 
-        // Roll is a dice pool or adv/dis that uses roll X take highest/lowest
-        if(rollFormula.contains("kh1") || rollFormula.contains("kl1")){
+        // Roll is a dice pool or adv/dis that uses roll X take highest/lowest or single die rolls (Dice pool size 1)
+        if( rollFormula.contains("kh") || rollFormula.contains("kl") ){
             retRollInfoObj.IsDicePool=true;
-            retRollInfoObj.PoolSize= rollObjSel.result.value;
-            retRollInfoObj.PoolMax= rollObjSel.result.value;
-            retRollInfoObj.PoolMin= rollObjSel.result.value;
-            retRollInfoObj.PoolVal= rollObjSel.result.value;
+            retRollInfoObj.PoolMax= 0;
+            retRollInfoObj.PoolMin= 9999999;
+            retRollInfoObj.PoolVal= 0;
+
+            // Loop thorugh dice rolled
+            for (let dice_type of rollObjSel.dice){
+
+                // For dice that are part of the pool
+                if (dice_type.modifiers.includes("kl") || dice_type.modifiers.includes("kh") || dice_type.modifiers.includes("kl1") || dice_type.modifiers.includes("kh1")){
+                    
+                    // For each die in roll
+                    for (let die of dice_type.dice) {
+                        let die_result = die.value;
+                        retRollInfoObj.PoolSize= dice_type.length;
+
+                        // Is it the selected die?
+                        if (die.active == true) {
+                            retRollInfoObj.PoolVal= die.value;
+                        }
+
+                        // Check Max
+                        if ( die_result > retRollInfoObj.PoolMax) {
+                            retRollInfoObj.PoolMax = die_result;
+                        }
+                        // Check Min
+                        if (die_result < retRollInfoObj.PoolMin) {
+                            retRollInfoObj.PoolMin = die_result;
+                        }
+                    }
+
+                    // If we never had a die selected through the active tag find it manually 
+                    if(retRollInfoObj.PoolVal == 0){
+                        // Keep Lowst
+                        if (dice_type.modifiers.includes("kl")){
+                            retRollInfoObj.PoolVal = retRollInfoObj.PoolMin;
+
+                        // Keep highest
+                        }else{
+                            retRollInfoObj.PoolVal = retRollInfoObj.PoolMax;
+                        }
+                    }
+                    
+                }
+            }
+
+            
         }
         return retRollInfoObj;
     }
