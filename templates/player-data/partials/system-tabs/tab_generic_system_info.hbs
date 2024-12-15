@@ -1,0 +1,12 @@
+<div>
+    {{#each _chartData}}
+        {{#if this._isChartDisplayed}}
+            <h1 class="dice-type-title">{{localize this._chartName}}</h1>
+            <div id="dice-stats-chart-id"+{{this.chart_id}}></div>
+        {{/if}}
+    {{/each}}
+</div>
+
+<script>
+    
+</script>
